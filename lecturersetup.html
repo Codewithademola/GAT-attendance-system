@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Lecturer Account Setup</title>
+    <script type="module" src="./JS/lecturersetup.js"></script>
+
+</head>
+
+<body>
+
+    <h2>Lecturer Account Setup</h2>
+
+    <form id="lecturerSetupForm">
+
+        <div>
+
+            <label for="lecturerEmail">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="lecturerEmail"
+                placeholder="Enter your approved email"
+                required
+            >
+
+        </div>
+
+        <br>
+
+
+        <div>
+
+            <label for="lecturerPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="lecturerPassword"
+                placeholder="Create a password"
+                required
+            >
+
+        </div>
+
+        <br>
+
+
+        <div>
+
+            <label for="confirmPassword">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required
+            >
+
+        </div>
+
+        <br>
+
+
+        <button type="submit">
+            Create Account
+        </button>
+
+    </form>
+
+
+    <p id="message"></p>
+
+
+
+</body>
+
+</html>

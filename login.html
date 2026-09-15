@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="./js/firebase-config.js"></script>
+    <script type="module" src="./JS/login.js"></script>
+</head>
+
+<body>
+<div class="circle circle1"></div>
+<div class="circle circle2"></div>
+<!-- the sign up box -->
+<form id="loginForm" class="signupcont">
+    <!-- sign up -->
+    <div class="scont">
+        <h1 class="htext">Log in</h1>
+        <p>Fill in your details...</p>
+
+        <span class="details"><svg class="signupsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M32 159.2l224 154 224-154V96H32v63.2zM480 198L256 352 32 198V416H480V198zM0 416V176 96 64H32 480h32V96v80V416v32H480 32 0V416z"/></svg><input id="email" type="email" placeholder="Email"></span>
+        <span class="details"><svg class="signupsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M112 128v64H336V128c0-61.9-50.1-112-112-112s-112 50.1-112 112zM96 192V128C96 57.3 153.3 0 224 0s128 57.3 128 128v64h32c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H96zm0 16H64c-26.5 0-48 21.5-48 48V448c0 26.5 21.5 48 48 48H384c26.5 0 48-21.5 48-48V256c0-26.5-21.5-48-48-48H352 336 112 96z"/></svg><input id="password" type="password" placeholder="Password"> <svg  class="psvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M106.3 124.3C151.4 82.4 212.4 48 288 48s136.6 34.4 181.7 76.3c44.9 41.7 75 91.7 89.1 125.6c1.6 3.9 1.6 8.4 0 12.3C544.7 296 514.6 346 469.7 387.7C424.6 429.6 363.6 464 288 464s-136.6-34.4-181.7-76.3C61.4 346 31.3 296 17.2 262.2c-1.6-3.9-1.6-8.4 0-12.3C31.3 216 61.4 166 106.3 124.3zM288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM192 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm208 0a112 112 0 1 0 -224 0 112 112 0 1 0 224 0z"/></svg></span>
+        <span  id="passChecker" ></span>
+        <div class="submit"><button id="login-Btn" type="submit" class="btn">
+    <span id="loginText">Login</span>
+    <span id="loginSpinner" class="spinner"></span>
+        </button>
+        </div>
+        
+        <div class="forgot-password"><a href="#" id="forgotPassword">Forgot Password?</a> </div>
+        <div class="lobtn"> <p>don't have an account? </p> <button type="button" class="lbtn">Register</button></div>
+        <!-- <div id="popup"></div> -->
+
+ 
+    </div>
+
+    <!-- heroimg -->
+    <div class="heroimg">
+        <h1 class="herotext">Login to</h1>
+        <p class="stp">student portal</p>
+        <p style="margin-left: 100px;">Login to access your student portal...</p>
+        <div class="hcont">
+        <img class="himg" src="asset/h.png" alt="student picture">
+        </div>
+    </div>    
+</form>
+     <div id="popup" class="popup">
+
+    <h3 id="popupTitle"></h3>
+
+    <p id="popupMessage"></p>
+
+
+    <!-- Used only for forgot password -->
+    <input 
+        type="email"
+        id="popupEmail"
+        placeholder="Enter your email"
+        style="display:none;"
+    >
+
+
+    <!-- Used only for actions like sending reset link -->
+    <button
+        id="popupActionBtn"
+        style="display:none;"
+        type="button">
+    </button>
+
+
+    <!-- Normal close button -->
+    <button
+        id="popupCloseBtn"
+        type="button"
+        onclick="window.closePopup()">
+        OK
+    </button>
+
+</div>
+</body>
+</html>

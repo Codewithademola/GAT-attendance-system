@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin.css">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="module" src="./JS/admin.js"></script>
+</head>
+
+<body>
+    <div class="dashboard">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                Attendance System
+            </div>
+
+            <nav>
+
+                <button class="nav-btn active" data-section="dashboard">
+                    Dashboard
+                </button>
+
+                <button class="nav-btn" data-section="lecturers">
+                    Lecturers
+                </button>
+
+                <button class="nav-btn" data-section="courses">
+                    Courses
+                </button>
+
+                <button class="nav-btn" data-section="attendance">
+                    Attendance
+                </button>
+
+                <button id="logoutBtn" class="logout-btn">
+                    Logout
+                </button>
+
+            </nav>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+         <header class="topbar">
+
+    <div class="title-group">
+
+        <button id="menuToggle" class="menu-toggle">
+            ☰
+        </button>
+
+        <div>
+            <h1>Admin Dashboard</h1>
+            <p>Manage the attendance system</p>
+        </div>
+
+    </div>
+
+    <div class="admin-info">
+        <span id="adminName">Admin</span>
+    </div>
+
+</header>
+
+
+            <!-- Dashboard Section -->
+
+<section id="dashboard" class="content-section active">
+
+<h2>Dashboard</h2>
+
+<!-- ============================= -->
+<!-- Statistics Cards -->
+<!-- ============================= -->
+
+<div class="stats-container">
+
+    <div class="stat-card">
+        <h3>Students</h3>
+        <p id="studentCount">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Lecturers</h3>
+        <p id="lecturerCount">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Courses</h3>
+        <p id="courseCount">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Attendance Sessions</h3>
+        <p id="sessionCount">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Present Today</h3>
+        <p id="presentTodayCount">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Attendance Rate</h3>
+        <p id="attendanceRate">0%</p>
+    </div>
+
+</div>
+
+<div class="chart-card">
+
+    <div class="chart-header">
+
+        <div>
+            <h3>Attendance Trend</h3>
+            <p>Student attendance over time</p>
+        </div>
+
+        <div class="attendance-filters">
+
+            <select id="attendanceLecturerFilter">
+                <option value="all">All Lecturers</option>
+            </select>
+
+            <select id="attendanceCourseFilter">
+                <option value="all">All Courses</option>
+            </select>
+
+        </div>
+
+    </div>
+
+    <div class="chart-container">
+        <canvas id="attendanceChart"></canvas>
+    </div>
+
+</div>
+
+
+
+<!-- ============================= -->
+<!-- Attendance Graph -->
+<!-- ============================= -->
+
+
+</section>
+
+
+
+            <!-- Lecturers Section -->
+            <section id="lecturers" class="content-section">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Lecturers</h2>
+                        <p>Manage lecturer access</p>
+                    </div>
+
+                    <button id="showLecturerFormBtn" class="primary-btn">
+                        + Add Lecturer
+                    </button>
+
+                </div>
+
+
+                <!-- Add Lecturer Form -->
+                <div id="lecturerFormContainer" class="form-card hidden">
+
+                    <h3>Give Lecturer Access</h3>
+
+                    <form id="lecturerForm">
+
+                        <div class="form-group">
+
+                            <label for="lecturerName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="lecturerName"
+                                placeholder="Enter lecturer's full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="staffId">
+                                Staff ID
+                            </label>
+
+                            <input
+                                type="text"
+                                id="staffId"
+                                placeholder="Enter staff ID"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="department">
+                                Department
+                            </label>
+
+                            <input
+                                type="text"
+                                id="department"
+                                placeholder="Enter department"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="lecturerEmail">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="lecturerEmail"
+                                placeholder="Enter lecturer email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                id="cancelLecturerBtn"
+                                class="secondary-btn"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="primary-btn"
+                            >
+                                Give Access
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- Lecturer List -->
+                <div class="table-card">
+
+                    <h3>Lecturer List</h3>
+
+                    <div class="table-wrapper">
+
+                       <table class="lecturer-table">
+
+                            <thead>
+                                 <tr>
+                            <th>Name</th>
+                            <th>Staff ID</th>
+                            <th>Department</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody id="lecturerTableBody">
+
+                                <!-- Lecturers will be loaded here -->
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Courses Section -->
+            <section id="courses" class="content-section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Courses</h2>
+            <p>View and manage all courses</p>
+        </div>
+
+    </div>
+
+    <div class="table-card">
+
+        <h3>Course List</h3>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Lecturer</th>
+                        
+                    </tr>
+                </thead>
+
+                <tbody id="courseTableBody">
+
+                    <tr>
+                        <td colspan="5">
+                            Loading courses...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Attendance Section -->
+<section id="attendance" class="content-section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Attendance</h2>
+            <p>View attendance by lecturer and date</p>
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- Lecturer Attendance List -->
+    <!-- ============================= -->
+
+    <div class="table-card">
+
+        <h3>Lecturers</h3>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Lecturer</th>
+                        <th>Department</th>
+                        <th>Attendance</th>
+                    </tr>
+                </thead>
+
+                <tbody id="attendanceLecturerTableBody">
+
+                    <tr>
+                        <td colspan="3">
+                            Loading lecturers...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- Lecturer Dates -->
+    <!-- ============================= -->
+
+    <div
+        id="attendanceDatesContainer"
+        class="table-card hidden"
+    >
+
+        <div class="section-header">
+
+            <div>
+
+                <h3 id="selectedLecturerName">
+                    Lecturer Attendance
+                </h3>
+
+                <p>
+                    Select a date to view attendance sessions
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="closeAttendanceDatesBtn"
+                class="secondary-btn"
+            >
+                Close
+            </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Sessions</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="attendanceDatesTableBody">
+
+                    <tr>
+                        <td colspan="3">
+                            No date selected.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- Sessions For Selected Date -->
+    <!-- ============================= -->
+
+    <div
+        id="attendanceSessionsContainer"
+        class="table-card hidden"
+    >
+
+        <div class="section-header">
+
+            <div>
+
+                <h3 id="selectedAttendanceDate">
+                    Attendance Sessions
+                </h3>
+
+                <p id="selectedAttendanceLecturer">
+                    Sessions for selected date
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="closeAttendanceSessionsBtn"
+                class="secondary-btn"
+            >
+                Close
+            </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+           <table class="wide-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Departments</th>
+                        <th>Levels</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="attendanceSessionsTableBody">
+
+                    <tr>
+                        <td colspan="8">
+                            No sessions selected.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- Student Attendance Records -->
+    <!-- ============================= -->
+
+    <div
+        id="attendanceRecordsContainer"
+        class="table-card hidden"
+    >
+
+        <div class="section-header">
+
+            <div>
+
+                <h3>
+                    Attendance Records
+                </h3>
+
+                <p id="selectedSessionInfo">
+                    Students who attended this session
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="closeAttendanceRecordsBtn"
+                class="secondary-btn"
+            >
+                Close
+            </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+          <table class="records-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Matric Number</th>
+                        <th>Department</th>
+                        <th>Level</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="attendanceRecordsTableBody">
+
+                    <tr>
+                        <td colspan="7">
+                            No records selected.
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+        </main>
+
+    </div>
+
+
+</body>
+</html>

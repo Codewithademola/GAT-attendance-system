@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dasboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js"></script>
+    <script type="module" src="./JS/student-dashboard.js"></script>
+</head>
+<body>
+    <div class="first-cont">
+    <header class="logo">
+        <h2>Student Attendance Portal</h2>
+        <div> <h2>welcome,<span id="welcomeName"></span> </h2></div>
+    </header>
+<div class="scont">
+    <div class="student-card">
+       <div class="info">
+        <diV class="details">  <strong> <span>Name:&nbsp;</span> </strong><p id="studentName"></p>  </diV>
+        <div class="details"> <strong> <span>Matric Number:&nbsp;</span>  </strong> <p id="studentMatric"></p> </div>
+       <div class="details">  <strong> <span>Department:&nbsp;</span>   </strong>  <p id="studentDepartment"> </p></div>
+        <div class="details">  <strong> <span>Level:&nbsp;</span>   </strong> <p id="studentLevel"></p></div>
+       </div>
+
+    </div>
+</div>
+
+
+<section class="face-registration" id="faceRegistrationSection">
+
+    <div class="face-box">
+
+        <h2>Face Registration</h2>
+
+        <p id="faceMessage">
+            Register your face before marking attendance.
+        </p>
+
+        <video
+            id="faceVideo"
+            width="320"
+            height="240"
+            autoplay
+            muted
+        ></video>
+
+        <br>
+
+        <button
+            id="startCameraBtn"
+            type="button"
+        >
+            Register Face
+        </button>
+
+        <button
+            id="captureFaceBtn"
+            type="button"
+            style="display: none;"
+        >
+            Capture Face
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="mark-att">
+    <div class="mark-box">
+<p style="font-size: 35px; font-family: Arial, Helvetica, sans-serif; margin-bottom: 20px;"> Mark Attendance</p> 
+
+<div>
+
+    <div id="activeAttendanceList"></div>
+</div>
+
+</div>
+</section>
+    </div>
+
+    <section class="second-cont">
+<div id="logoutBtn" class="logout"> 
+    <span style="font-size: 30px; margin-left: 10px;">Attendance Summary</span>
+    <span><button class="logoutbtn">Log out</button></span>
+</div>
+<div class="summary-box">
+
+<div class="scont">
+    <div class="summary">
+       <div class="suminfo">
+         <p>Present:</p>
+        <p>Absent:</p>
+        <p>Attendance: </p>
+       </div>
+
+    </div>
+</div>
+
+
+<div class="scont">
+    <div class="summary">
+      <p style="text-align: center;">NOTIFICATION</p>
+
+    </div>
+</div>
+</div>
+<div class="table">
+    <div class="table-container">
+<table>
+
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+
+    <tbody id="attendanceTableBody">
+
+        <!-- JavaScript will load attendance here -->
+
+    </tbody>
+
+</table>
+</div>
+
+</div>
+
+    </section>
+
+    <!-- Attendance Popup -->
+<div id="attendancePopup" class="attendance-popup-overlay">
+
+    <div class="attendance-popup">
+
+        <div id="popupIcon" class="popup-icon">
+            ✓
+        </div>
+
+        <h2 id="popupTitle">Attendance Successful</h2>
+
+        <p id="popupMessage">
+            Your attendance has been marked successfully.
+        </p>
+
+        <button id="popupCloseBtn" type="button">
+            OK
+        </button>
+
+    </div>
+
+</div>
+</body>
+</html>
