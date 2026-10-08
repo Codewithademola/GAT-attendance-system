@@ -953,26 +953,87 @@ if (!user) {
     return;
 }
 
-const studentRef = doc(
-    db,
-    "students",
-    user.uid
+
+// Get the current student's stored information
+const student = JSON.parse(
+    localStorage.getItem("student")
 );
 
-const studentSnap = await getDoc(studentRef);
-
-if (!studentSnap.exists()) {
+if (!student) {
 
     showAttendancePopup(
-        "Student Record Not Found",
-        "Your student account record could not be found.",
+        "Student Information Missing",
+        "Your student information could not be loaded. Please log in again.",
         "error"
     );
 
     return;
 }
 
-const studentData = studentSnap.data();
+
+// Make sure localStorage belongs to the
+// currently authenticated Firebase account
+if (
+    student.email &&
+    user.email &&
+    student.email.toLowerCase() !== user.email.toLowerCase()
+) {
+
+    console.error(
+        "Student data does not match authenticated account."
+    );
+
+    console.error(
+        "Firebase email:",
+        user.email
+    );
+
+    console.error(
+        "Stored student email:",
+        student.email
+    );
+
+    showAttendancePopup(
+        "Account Session Mismatch",
+        "Your student session does not match the logged-in account. Please log out and log in again.",
+        "error"
+    );
+
+    return;
+}
+
+
+console.log("=================================");
+console.log("STUDENT DATA BEFORE ATTENDANCE");
+console.log("Firebase UID:", user.uid);
+console.log("Firebase Email:", user.email);
+console.log("Student name:", student.fullName);
+console.log("Student matric:", student.matricNumber);
+console.log("Student department:", student.department);
+console.log("Student level:", student.level);
+console.log("=================================");
+
+
+if (
+    !student.fullName ||
+    !student.matricNumber ||
+    !student.department ||
+    !student.level
+) {
+
+    console.error(
+        "Student information is incomplete:",
+        student
+    );
+
+    showAttendancePopup(
+        "Student Information Incomplete",
+        "Your student information is incomplete. Please log out and log in again.",
+        "error"
+    );
+
+    return;
+}
 
 
 // Check if attendance already exists
@@ -1009,13 +1070,13 @@ await addDoc(
     {
         studentId: user.uid,
 
-        studentName: studentData.fullName,
+        studentName: student.fullName,
 
-        matricNumber: studentData.matricNumber,
+        matricNumber: student.matricNumber,
 
-        department: studentData.department,
+        department: student.department,
 
-        level: studentData.level,
+        level: student.level,
 
         courseName: session.courseName,
 
@@ -1034,7 +1095,6 @@ await addDoc(
         createdAt: serverTimestamp()
     }
 );
-
 
 console.log("Attendance saved successfully");
 await loadRecentAttendance(user.uid);
