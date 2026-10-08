@@ -19,6 +19,7 @@ const popup = document.getElementById("popup");
 const popupTitle = document.getElementById("popupTitle");
 const popupMessage = document.getElementById("popupMessage");
 let redirectPage = "";
+// console
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
