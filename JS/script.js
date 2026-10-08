@@ -5,7 +5,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { doc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 // Sign out the newly created account
-
+await signOut(auth);
 
 // Clear any previous student's local data
 localStorage.removeItem("student");
